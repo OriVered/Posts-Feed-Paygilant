@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+/**
+ * App Component
+ *
+ * This is the root component of the application. It uses React Router for routing
+ * and sets up the main routing structure of the app.
+ *
+ * @component
+ * @returns {JSX.Element} The root element of the application containing routing setup.
+ *
+ * @example
+ * <App />
+ *
+ * Features:
+ * - The app uses `BrowserRouter` for handling routing.
+ * - The `Routes` component defines the application's route configuration.
+ *
+ */
+const App = () => (
+    <Router>
+        <Routes>
+            <Route path="/" element={<Home />} />
+        </Routes>
+    </Router>
+);
 
 export default App;
