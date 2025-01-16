@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { HOME_TEXTS, COMMON_TEXTS } from "../consts/texts";
 import "../assets/styles/Home.scss";
 import Api from "../api/Api";
 import Card from "../components/Card"
+import { usePostsContext } from "../contexts/PostsContext";
+import { useLoaderContext } from "../contexts/LoaderContext";
+
 /**
  * Home Component
  *
@@ -17,33 +20,24 @@ import Card from "../components/Card"
  *
  */
 const Home = () => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+
+    const { posts, setPosts } = usePostsContext();
+    const { setLoading, setError } = useLoaderContext();
 
     useEffect(() => {
-        // Fetch posts when the component mounts
-        const fetchData = async () => {
+        const fetchPosts = async () => {
             try {
-                const postsData = await Api.fetchPosts();
-                setPosts(postsData);  // Set the fetched posts to state
+                const postsData = await Api.fetchPosts(setLoading, setError);
+                setPosts(postsData);
             } catch (err) {
-                setError(err.message);  // Set error if fetching fails
-            } finally {
-                setLoading(false);  // Set loading to false once the fetch completes
-            }
+                setError(HOME_TEXTS.ERROR_FETCH);
+            } 
         };
 
-        fetchData();
-    }, []); // Empty dependency array means this effect runs once on mount
 
-    if (loading) {
-        return <div>{COMMON_TEXTS.LOADING}</div>; // Show loading state
-    }
+        fetchPosts();
+    }, [setPosts, setLoading, setError]);
 
-    if (error) {
-        return <div>Error: {error}</div>; // Show error if any occurs
-    }
 
     return (
         <div className="home container">

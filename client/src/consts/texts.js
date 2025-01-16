@@ -1,6 +1,7 @@
 // Texts for Home Page
 export const HOME_TEXTS = {
     TITLE: "Posts",
+    ERROR_FETCH: "Failed to fetch posts. Please try again later.",
 };
 
 export const POST_DETAILS_TEXTS = {

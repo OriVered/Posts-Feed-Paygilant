@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { POST_DETAILS_TEXTS, COMMON_TEXTS } from "../consts/texts";
 import Api from "../api/Api";
 import "../assets/styles/PostDetails.scss";
+import { useLoaderContext } from "../contexts/LoaderContext";
 
 /**
  * PostDetails Component
@@ -23,8 +24,7 @@ const PostDetails = () => {
     const navigate = useNavigate(); 
     const [post, setPost] = useState(null); 
     const [comments, setComments] = useState([]); 
-    const [loading, setLoading] = useState(true); 
-    const [error, setError] = useState(null); 
+    const { setLoading, setError } = useLoaderContext();
 
     /**
      * Fetches post and comments data when the component mounts or when the post ID changes.
@@ -52,16 +52,6 @@ const PostDetails = () => {
 
         fetchPostDetails();
     }, [id]); // Dependency array ensures the effect runs when the `id` changes
-
-    
-    if (loading) {
-        return <div>{COMMON_TEXTS.LOADING}</div>; // Show loading state
-    }
-
-    // Show error message if fetching data fails
-    if (error) {
-        return <p className="error-message">{error}</p>;
-    }
 
     return (
         <div className="post-details container">

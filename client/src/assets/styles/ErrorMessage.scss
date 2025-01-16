@@ -1,0 +1,25 @@
+.error-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff4d4f;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    z-index: 9998;
+
+    button {
+        background: none;
+        border: none;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        margin-left: 20px;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
