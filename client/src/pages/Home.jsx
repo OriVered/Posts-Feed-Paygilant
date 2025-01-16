@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { HOME_TEXTS } from "../consts/texts";
 import "../assets/styles/Home.scss";
+import Api from "../api/Api";
 
 /**
  * Home Component
@@ -16,9 +17,49 @@ import "../assets/styles/Home.scss";
  *
  */
 const Home = () => {
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // Fetch posts when the component mounts
+        const fetchData = async () => {
+            try {
+                const postsData = await Api.fetchPosts();
+                setPosts(postsData);  // Set the fetched posts to state
+            } catch (err) {
+                setError(err.message);  // Set error if fetching fails
+            } finally {
+                setLoading(false);  // Set loading to false once the fetch completes
+            }
+        };
+
+        fetchData();
+    }, []); // Empty dependency array means this effect runs once on mount
+
+    if (loading) {
+        return <div>Loading...</div>; // Show loading state
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>; // Show error if any occurs
+    }
+
     return (
         <div className="home container">
             <h1>{HOME_TEXTS.TITLE}</h1>
+            <div className="posts">
+                {posts.length > 0 ? (
+                    posts.map((post, index) => (
+                        <div key={index} className="post">
+                            <h2>{post.title}</h2>
+                            <p>{post.body}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No posts available.</p>
+                )}
+            </div>
         </div>
     );
 };
