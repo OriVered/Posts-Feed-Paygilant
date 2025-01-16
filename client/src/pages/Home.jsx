@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HOME_TEXTS } from "../consts/texts";
+import { HOME_TEXTS, COMMON_TEXTS } from "../consts/texts";
 import "../assets/styles/Home.scss";
 import Api from "../api/Api";
 import Card from "../components/Card"
@@ -38,7 +38,7 @@ const Home = () => {
     }, []); // Empty dependency array means this effect runs once on mount
 
     if (loading) {
-        return <div>Loading...</div>; // Show loading state
+        return <div>{COMMON_TEXTS.LOADING}</div>; // Show loading state
     }
 
     if (error) {

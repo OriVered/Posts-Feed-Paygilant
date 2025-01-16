@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../assets/styles/Card.scss";
+import { URLS } from "../consts/urls";
 
 /**
  * Card Component
@@ -22,8 +24,10 @@ import "../assets/styles/Card.scss";
 const Card = ({ id, title, body }) => {
     return (
         <div className="card">
+            <Link to={`${URLS.POSTS}/${id}`}>
                 <h2>{title}</h2>
                 <p>{body}</p>
+            </Link>
         </div>
     );
 };
