@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HOME_TEXTS } from "../consts/texts";
 import "../assets/styles/Home.scss";
 import Api from "../api/Api";
-
+import Card from "../components/Card"
 /**
  * Home Component
  *
@@ -49,16 +49,9 @@ const Home = () => {
         <div className="home container">
             <h1>{HOME_TEXTS.TITLE}</h1>
             <div className="posts">
-                {posts.length > 0 ? (
-                    posts.map((post, index) => (
-                        <div key={index} className="post">
-                            <h2>{post.title}</h2>
-                            <p>{post.body}</p>
-                        </div>
-                    ))
-                ) : (
-                    <p>No posts available.</p>
-                )}
+                {posts.map((post) => (
+                    <Card key={post.id} id={post.id} title={post.title} body={post.body} />
+                ))}
             </div>
         </div>
     );
