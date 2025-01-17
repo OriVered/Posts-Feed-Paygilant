@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { HOME_TEXTS, ADD_POST_TEXTS } from "../consts/texts";
 import "../assets/styles/Home.scss";
-import SearchBar from "../components/SearchBar";
+import Api from "../api/Api";
 import Card from "../components/Card";
+import SearchBar from "../components/SearchBar";
 import { usePostsContext } from "../contexts/PostsContext";
 import { useLoaderContext } from "../contexts/LoaderContext";
 
@@ -20,32 +21,45 @@ import { useLoaderContext } from "../contexts/LoaderContext";
  * <Home />
  */
 const Home = () => {
-    const { posts } = usePostsContext(); // Get posts from context
-    const { error } = useLoaderContext(); // Get error from context
+    const { posts, setPosts } = usePostsContext();
+    const { setLoading, setError, error } = useLoaderContext();
     const navigate = useNavigate();
     const [query, setQuery] = useState(""); // Search query state
     const [filteredPosts, setFilteredPosts] = useState([]); // Filtered posts state
 
-    // Update filtered posts whenever `posts` changes or `query` changes
     useEffect(() => {
-        const lowerCaseQuery = query.toLowerCase();
-        const filtered = posts.filter((post) =>
-            post.title.toLowerCase().includes(lowerCaseQuery)
-        );
-        setFilteredPosts(filtered);
-    }, [posts, query]);
+        const fetchPosts = async () => {
+            try {
+                const postsData = await Api.fetchPosts(setLoading, setError);
+                setPosts(postsData || []);
+                setFilteredPosts(postsData || []); // Initialize filtered posts
+            } catch (err) {
+                setError(HOME_TEXTS.ERROR_FETCH);
+            }
+        };
+
+        fetchPosts();
+    }, [setPosts, setLoading, setError]);
 
     /**
-     * Updates the search query.
+     * Filters posts based on the search query.
      *
      * @param {string} searchQuery - The current search query.
      */
-    const handleQueryChange = useCallback((searchQuery) => {
-        setQuery(searchQuery); // Update the query state
-    }, []);
+    const handleQueryChange = useCallback(
+        (searchQuery) => {
+            setQuery(searchQuery);
+            const lowerCaseQuery = searchQuery.toLowerCase();
+            const filtered = posts.filter((post) =>
+                post.title.toLowerCase().includes(lowerCaseQuery)
+            );
+            setFilteredPosts(filtered);
+        },
+        [posts]
+    );
 
     return (
-        <div className="home container">
+        <div className="home">
             <h1>{HOME_TEXTS.TITLE}</h1>
 
             {/* Error message */}
@@ -55,7 +69,7 @@ const Home = () => {
             <SearchBar query={query} onQueryChange={handleQueryChange} />
 
             {/* Add Post Button */}
-            <button className="add-post-button" onClick={() => navigate("/add-post")}>
+            <button className="button" onClick={() => navigate("/add-post")}>
                 {ADD_POST_TEXTS.BUTTON}
             </button>
 

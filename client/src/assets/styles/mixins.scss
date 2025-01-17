@@ -1,0 +1,22 @@
+// Center Flexbox
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Button Style
+@mixin button-style($bg-color, $hover-color) {
+    padding: $spacing-small $spacing-medium;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: $bg-color;
+    color: white;
+
+    &:hover {
+        background-color: $hover-color;
+    }
+}

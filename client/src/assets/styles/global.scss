@@ -1,56 +1,27 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+@import "./variables.scss";
+@import "./mixins.scss";
+
+// Buttons
+.button {
+    @include button-style($primary-color, darken($primary-color, 10%));
 }
 
-h1, h2, p {
-    margin: 0;
+// Cards
+.card {
+    background-color: white;
+    padding: $spacing-medium;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: $spacing-medium 0;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.back-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    text-transform: uppercase;
-
-    &:hover {
-        background-color: #0056b3;
-    }
-}
-
-button {
-    padding: 10px 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-
-    &:hover {
-        background-color: #2980b9;
-    }
-}
-
+// Error Messages
 .error-message {
-    background-color: #ff0004;
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
+    background-color: $error-color;
+    color: white;
+    padding: $spacing-small $spacing-medium;
     text-align: center;
-    font-size: 16px;
-    border-radius: 5px;
-    margin: 10px 0;
+    font-size: 14px;
+    border-radius: $border-radius;
+    margin: $spacing-small 0;
 }
