@@ -24,7 +24,7 @@ const PostDetails = () => {
     const navigate = useNavigate(); 
     const [post, setPost] = useState(null); 
     const [comments, setComments] = useState([]); 
-    const { setLoading, setError } = useLoaderContext();
+    const { setLoading, setError, error } = useLoaderContext();
 
     /**
      * Fetches post and comments data when the component mounts or when the post ID changes.
@@ -64,6 +64,10 @@ const PostDetails = () => {
             {/* Page title display */}
             <h1>{POST_DETAILS_TEXTS.TITLE}</h1>
 
+            {/* Error message */}
+            {error && <p className="error-message">{error}</p>}
+
+
             {/* Post content display */}
             {post && (
                 <div className="post-content">
@@ -74,7 +78,7 @@ const PostDetails = () => {
 
             {/* Comments section */}
             <div className="comments-section">
-                <h2>{POST_DETAILS_TEXTS.COMMENTS_TITLE}</h2>
+            <h2>{POST_DETAILS_TEXTS.COMMENTS_TITLE}</h2>
                 {comments.length > 0 ? (
                     <ul>
                         {comments.map((comment) => (
