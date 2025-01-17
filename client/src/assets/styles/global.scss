@@ -30,3 +30,17 @@ h1, h2, p {
         background-color: #0056b3;
     }
 }
+
+button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+        background-color: #2980b9;
+    }
+}

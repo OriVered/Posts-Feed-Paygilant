@@ -45,7 +45,7 @@ const AddPost = () => {
         };
 
         // Update the global posts state
-        setPosts([newPost, ...posts]);
+        setPosts([...posts, newPost]);
 
         // Reset form fields
         setTitle("");
@@ -57,18 +57,18 @@ const AddPost = () => {
     };
 
     return (
-        <div className="add-post">
+        <div className="add-post container">
             {/* Back button to navigate to the previous page */}
             <button className="back-button" onClick={() => navigate(-1)}>
                 {COMMON_TEXTS.BACK_BUTTON}
             </button>
 
-            <h2>{ADD_POST_TEXTS.TITLE}</h2>
+            <h1>{ADD_POST_TEXTS.TITLE}</h1>
 
             {/* Error message */}
             {error && <p className="error-message">{error}</p>}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="form-content">
                 <input
                     type="text"
                     value={title}
@@ -80,7 +80,7 @@ const AddPost = () => {
                     placeholder={ADD_POST_TEXTS.BODY_PLACEHOLDER}
                     onChange={(e) => setBody(e.target.value)}
                 />
-                <button type="submit">{ADD_POST_TEXTS.SUBMIT_BUTTON}</button>
+                <button type="submit">{ADD_POST_TEXTS.BUTTON}</button>
             </form>
         </div>
     );
