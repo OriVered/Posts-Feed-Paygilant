@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HOME_TEXTS, ADD_POST_TEXTS } from "../consts/texts";
 import "../assets/styles/Home.scss";
-import Api from "../api/Api";
-import Card from "../components/Card";
 import SearchBar from "../components/SearchBar";
+import Card from "../components/Card";
 import { usePostsContext } from "../contexts/PostsContext";
 import { useLoaderContext } from "../contexts/LoaderContext";
 
@@ -21,42 +20,29 @@ import { useLoaderContext } from "../contexts/LoaderContext";
  * <Home />
  */
 const Home = () => {
-    const { posts, setPosts } = usePostsContext();
-    const { setLoading, setError, error } = useLoaderContext();
+    const { posts } = usePostsContext(); // Get posts from context
+    const { error } = useLoaderContext(); // Get error from context
     const navigate = useNavigate();
     const [query, setQuery] = useState(""); // Search query state
     const [filteredPosts, setFilteredPosts] = useState([]); // Filtered posts state
 
+    // Update filtered posts whenever `posts` changes or `query` changes
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const postsData = await Api.fetchPosts(setLoading, setError);
-                setPosts(postsData || []);
-                setFilteredPosts(postsData || []); // Initialize filtered posts
-            } catch (err) {
-                setError(HOME_TEXTS.ERROR_FETCH);
-            }
-        };
-
-        fetchPosts();
-    }, [setPosts, setLoading, setError]);
+        const lowerCaseQuery = query.toLowerCase();
+        const filtered = posts.filter((post) =>
+            post.title.toLowerCase().includes(lowerCaseQuery)
+        );
+        setFilteredPosts(filtered);
+    }, [posts, query]);
 
     /**
-     * Filters posts based on the search query.
+     * Updates the search query.
      *
      * @param {string} searchQuery - The current search query.
      */
-    const handleQueryChange = useCallback(
-        (searchQuery) => {
-            setQuery(searchQuery);
-            const lowerCaseQuery = searchQuery.toLowerCase();
-            const filtered = posts.filter((post) =>
-                post.title.toLowerCase().includes(lowerCaseQuery)
-            );
-            setFilteredPosts(filtered);
-        },
-        [posts]
-    );
+    const handleQueryChange = useCallback((searchQuery) => {
+        setQuery(searchQuery); // Update the query state
+    }, []);
 
     return (
         <div className="home container">
