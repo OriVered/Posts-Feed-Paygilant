@@ -22,7 +22,7 @@ import { useLoaderContext } from "../contexts/LoaderContext";
 const Home = () => {
 
     const { posts, setPosts } = usePostsContext();
-    const { setLoading, setError } = useLoaderContext();
+    const { setLoading, setError, error } = useLoaderContext();
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -41,7 +41,12 @@ const Home = () => {
 
     return (
         <div className="home container">
+
             <h1>{HOME_TEXTS.TITLE}</h1>
+
+            {/* Error message */}
+            {error && <p className="error-message">{error}</p>}
+
             <div className="posts">
                 {posts.map((post) => (
                     <Card key={post.id} id={post.id} title={post.title} body={post.body} />

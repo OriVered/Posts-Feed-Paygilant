@@ -28,7 +28,6 @@ const App = () => (
     <PostsProvider>
       <Router>
           <Loader /> {/* Global Loader */}
-          <ErrorMessage /> {/* Global ErrorMessage */}
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/posts/:id" element={<PostDetails />} />

@@ -5,20 +5,19 @@ import "../assets/styles/ErrorMessage.scss";
 /**
  * ErrorMessage Component
  *
- * Displays a global error banner when the `error` state in the LoaderContext is set.
+ * Displays an error message from the global `error` state, styled for inline placement.
  *
  * @component
- * @returns {JSX.Element|null} An error banner or null if no error.
+ * @returns {JSX.Element|null} An error message or null if no error.
  */
 const ErrorMessage = () => {
-    const { error, setError } = useLoaderContext();
+    const { error } = useLoaderContext();
 
     if (!error) return null;
 
     return (
-        <div className="error-banner">
+        <div className="error-message">
             <p>{error}</p>
-            <button onClick={() => setError(null)}>Dismiss</button>
         </div>
     );
 };
