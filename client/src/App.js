@@ -2,10 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import PostDetails from "./pages/PostDetails";
+import AddPost from "./pages/AddPost";
 import {PostsProvider} from "./contexts/PostsContext";
 import {LoaderProvider} from "./contexts/LoaderContext"
 import Loader from "./components/Loader"
-import ErrorMessage from "./components/ErrorMessage";
+
 /**
  * App Component
  *
@@ -31,6 +32,7 @@ const App = () => (
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/posts/:id" element={<PostDetails />} />
+              <Route path="/add-post" element={<AddPost />} />           
           </Routes>
       </Router>
   </PostsProvider>

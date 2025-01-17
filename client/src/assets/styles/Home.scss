@@ -1,10 +1,20 @@
-.home {
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-top: 20px;
 
-    .posts {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
+    .add-post-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .add-post-button:hover {
+        background-color: #0056b3;
     }
 }
