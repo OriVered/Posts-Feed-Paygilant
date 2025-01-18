@@ -57,18 +57,19 @@ const AddPost = () => {
     };
 
     return (
-        <div className="add-post container">
+        <div className="add-post">
             {/* Back button to navigate to the previous page */}
-            <button className="back-button" onClick={() => navigate(-1)}>
+            <button className="button" onClick={() => navigate(-1)}>
                 {COMMON_TEXTS.BACK_BUTTON}
             </button>
-
             <h1>{ADD_POST_TEXTS.TITLE}</h1>
 
             {/* Error message */}
             {error && <p className="error-message">{error}</p>}
 
-            <form onSubmit={handleSubmit} className="form-content">
+            {/* Add post form */}
+            <div className="form-content">
+            <form onSubmit={handleSubmit} >
                 <input
                     type="text"
                     value={title}
@@ -82,6 +83,7 @@ const AddPost = () => {
                 />
                 <button type="submit">{ADD_POST_TEXTS.BUTTON}</button>
             </form>
+            </div>
         </div>
     );
 };
