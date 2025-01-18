@@ -54,10 +54,10 @@ const PostDetails = () => {
     }, [id]); // Dependency array ensures the effect runs when the `id` changes
 
     return (
-        <div className="post-details container">
+        <div className="post-details">
 
             {/* Back button to navigate to the previous page */}
-            <button className="back-button" onClick={() => navigate(-1)}>
+            <button className="button" onClick={() => navigate(-1)}>
                 {COMMON_TEXTS.BACK_BUTTON}
             </button>
 
@@ -67,10 +67,10 @@ const PostDetails = () => {
             {/* Error message */}
             {error && <p className="error-message">{error}</p>}
 
-
+            <div className="post-content">
             {/* Post content display */}
             {post && (
-                <div className="post-content">
+                <div >
                     <h1>{post.title}</h1>
                     <p>{post.body}</p>
                 </div>
@@ -91,6 +91,7 @@ const PostDetails = () => {
                 ) : (
                     <p>{COMMON_TEXTS.NO_COMMENTS}</p> // Message if no comments exist
                 )}
+            </div>
             </div>
         </div>
     );

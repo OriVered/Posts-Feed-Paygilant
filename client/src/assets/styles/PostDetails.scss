@@ -1,16 +1,15 @@
+@import "./variables.scss";
+@import "./global.scss";
+
 .post-details {
-    margin-top: 20px;
+    @extend .container;
 
     .post-content {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
+        @extend .card;
 
         h1 {
             font-size: 24px;
-            margin-bottom: 15px;
+            color: $primary-color;
         }
 
         p {
@@ -20,9 +19,12 @@
     }
 
     .comments-section {
+      
+        border-top: 3px solid $light-gray;
+
         h2 {
             font-size: 20px;
-            margin-bottom: 15px;
+            color: $secondary-color;
         }
 
         ul {
@@ -30,20 +32,24 @@
             padding: 0;
 
             li {
-                background-color: #f9f9f9;
-                padding: 15px;
-                margin-bottom: 10px;
-                border-radius: 5px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                background-color: $card-background-color;
+                border-bottom: 1px solid $light-gray;
+                padding-bottom: $spacing-small;
+                
+
+                &:last-child {
+                    border-bottom: none;
+                }
 
                 h3 {
-                    font-size: 16px;
+                    font-size: 14px;
                     font-weight: bold;
-                    margin-bottom: 5px;
+                    margin-bottom: $spacing-small;
+                    color: $primary-color;
                 }
 
                 p {
-                    font-size: 14px;
+                    font-size: 12px;
                     line-height: 1.4;
                 }
             }
