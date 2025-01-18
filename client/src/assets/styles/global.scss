@@ -1,18 +1,48 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 
+// Global styles
+body {
+    margin: 0;
+    font-family: $font-family;
+    background-color: $background-color;
+    color: $dark-gray;
+}
+
+// Containers
+.container {
+    width: 100%;
+    max-width: 600px; 
+    margin: 0 auto;
+    padding: $spacing-medium;
+
+    @media (max-width: $breakpoint-mobile) {
+        max-width: 100%; 
+    }
+}
+
+// Headings
+h1 {
+    font-size: 24px;
+    margin-bottom: $spacing-medium;
+    text-align: center;
+    color: $dark-gray;
+}
+
 // Buttons
 .button {
-    @include button-style($primary-color, darken($primary-color, 10%));
+    @include button-style($primary-color, lighten($primary-color, 10%));
+    display: block;
+    margin: $spacing-small auto;
 }
 
 // Cards
 .card {
-    background-color: white;
+    background-color: $card-background-color;
     padding: $spacing-medium;
     border-radius: $border-radius;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: $spacing-medium 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: $spacing-small 0;
 }
 
 // Error Messages
