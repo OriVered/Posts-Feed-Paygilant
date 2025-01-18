@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
  * <AddPost />
  */
 const AddPost = () => {
-    const { posts, setPosts } = usePostsContext();
+    const { posts, setPosts, setLoading } = usePostsContext();
     const [title, setTitle] = useState(""); // Local state for title
     const [body, setBody] = useState(""); // Local state for body
     const [error, setError] = useState(null); // Local error state
@@ -29,6 +29,7 @@ const AddPost = () => {
      * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
      */
     const handleSubmit = (e) => {
+        if (setLoading) setLoading(true); // Enable loading
         e.preventDefault(); // Prevent default form submission
 
         // Validate input fields
@@ -51,9 +52,10 @@ const AddPost = () => {
         setTitle("");
         setBody("");
         setError(null);
-
+        
         // Navigate back to the home page
         navigate("/");
+        if (setLoading) setLoading(false); // Disable loading
     };
 
     return (
